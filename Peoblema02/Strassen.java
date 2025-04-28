@@ -1,9 +1,10 @@
 public class Strassen {
 
+    // Método principal para multiplicação de matrizes
     public static int[][] multiply(int[][] A, int[][] B) {
         int n = A.length;
 
-        // Base case: matriz 1x1
+        // Caso base: matriz 1x1
         if (n == 1) {
             int[][] result = { { A[0][0] * B[0][0] } };
             return result;
@@ -89,5 +90,40 @@ public class Strassen {
         for (int i = 0; i < child.length; i++)
             for (int j = 0; j < child.length; j++)
                 parent[i + rowOffset][j + colOffset] = child[i][j];
+    }
+
+    // Função principal para teste
+    public static void main(String[] args) {
+        // Matrizes de teste
+        int[][] A = {
+            {1, 2},
+            {3, 4}
+        };
+
+        int[][] B = {
+            {5, 6},
+            {7, 8}
+        };
+
+        // Medir tempo de execução
+        long startTime = System.nanoTime();  // Marcar o início do tempo
+
+        // Multiplicar as matrizes usando Strassen
+        int[][] result = multiply(A, B);
+
+        long endTime = System.nanoTime();  // Marcar o final do tempo
+        long duration = endTime - startTime;  // Calcular a duração
+
+        // Exibir resultado da multiplicação
+        System.out.println("Resultado da multiplicação:");
+        for (int[] row : result) {
+            for (int val : row) {
+                System.out.print(val + " ");
+            }
+            System.out.println();
+        }
+
+        // Exibir o tempo de execução
+        System.out.printf("Tempo de execução: %.2f ms%n", duration / 1e6);
     }
 }
